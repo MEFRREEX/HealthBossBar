@@ -1,0 +1,8 @@
+# Доступные заполнители: {name}, {tag}, {health}, {maxhealth}.
+bossbar-text: "{name}"
+
+# Доступные цвета: PINK, BLUE, RED, GREEN, YELLOW, PURPLE, WHITE.
+color: "RED"
+
+# Время через которое будет пропадать бар. В секундах.
+bossbar-remove-time: 5
