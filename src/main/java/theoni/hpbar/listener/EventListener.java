@@ -31,37 +31,36 @@ public class EventListener implements Listener {
     
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-        Entity entity = event.getEntity();
-        Player damager = (Player) event.getDamager();
-        if (!(event.getDamager() instanceof Player)) return;
+        if (event.getDamager() instanceof Player) {
+            Entity entity = event.getEntity();
+            Player damager = (Player) event.getDamager();
+            Float health = entity.getHealth();
+            Float maxhealth = (float) entity.getMaxHealth();
 
-        Float health = entity.getHealth();
-        Float maxhealth = (float) entity.getMaxHealth();
+            float length = health * ((health % maxhealth) / 4);
+            DummyBossBar bar = new Builder(damager)
+                .text(config.getString("bossbar-text")
+                    .replace("{name}", entity.getName())
+                    .replace("{tag}", entity.getNameTag())
+                    .replace("{health}", health.toString())
+                    .replace("{maxhealth}", maxhealth.toString()))
+                .color(BossBarColor.valueOf(config.getString("color")))
+                .length(length)
+                .build();
+            damager.createBossBar(bar);
+            BossBarManager.removeBossBar(damager);
+            BossBarManager.addBossBar(damager, bar);
+            lastHit.put(damager.getUniqueId(), System.currentTimeMillis());
 
-        float length = health * ((health % maxhealth) / 4);
-        DummyBossBar bar = new Builder(damager)
-            .text(config.getString("bossbar-text")
-                .replace("{name}", entity.getName())
-                .replace("{tag}", entity.getNameTag())
-                .replace("{health}", health.toString())
-                .replace("{maxhealth}", maxhealth.toString()))
-            .color(BossBarColor.valueOf(config.getString("color")))
-            .length(length)
-            .build();
-        damager.createBossBar(bar);
-        BossBarManager.removeBossBar(damager);
-        BossBarManager.addBossBar(damager, bar);
-        lastHit.put(damager.getUniqueId(), System.currentTimeMillis());
-
-        // Удаление бара через 5 секунд после удара по игроку
-        (new Timer()).schedule(new TimerTask() {
-            public void run() {
-                if (System.currentTimeMillis() - lastHit.get(damager.getUniqueId()) >= config.getInt("bossbar-remove-time") * 1000) {
-                    BossBarManager.removeBossBar(damager);
-                    lastHit.remove(damager.getUniqueId());
+            // Удаление бара через 5 секунд после удара по игроку
+            (new Timer()).schedule(new TimerTask() {
+                public void run() {
+                    if (System.currentTimeMillis() - lastHit.get(damager.getUniqueId()) >= config.getInt("bossbar-remove-time") * 1000) {
+                        BossBarManager.removeBossBar(damager);
+                        lastHit.remove(damager.getUniqueId());
+                    }
                 }
-            }
-        }, config.getInt("bossbar-remove-time") * 1000);
+            }, config.getInt("bossbar-remove-time") * 1000);
+        }
     }
 }
-
