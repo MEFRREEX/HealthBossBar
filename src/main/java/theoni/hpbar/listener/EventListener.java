@@ -58,6 +58,7 @@ public class EventListener implements Listener {
             public void run() {
                 if (System.currentTimeMillis() - lastHit.get(damager.getUniqueId()) >= config.getInt("bossbar-remove-time") * 1000) {
                     BossBarManager.removeBossBar(damager);
+                    lastHit.remove(damager.getUniqueId());
                 }
             }
         }, config.getInt("bossbar-remove-time") * 1000);
