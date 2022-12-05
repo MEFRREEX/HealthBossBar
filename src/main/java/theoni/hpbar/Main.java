@@ -8,6 +8,7 @@ public class Main extends PluginBase implements Listener {
 
     public void onEnable() {
         saveDefaultConfig();
+        saveResource("mobs.yml");
         getServer().getPluginManager().registerEvents((Listener)new EventListener(this), (Main)this);
     }
 }
