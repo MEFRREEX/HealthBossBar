@@ -1,0 +1,12 @@
+enable: true
+
+# Available: blacklist, whitelist.
+type: "blacklist"
+
+# Enter the networkid of mobs for which you do not want to display the boss bar. 
+# You can find out the networkid of each mob at 
+# https://github.com/PowerNukkitX/PowerNukkitX/tree/master/src/main/java/cn/nukkit/entity/
+mobs:
+  - 53
+  - 52
+  - 131
