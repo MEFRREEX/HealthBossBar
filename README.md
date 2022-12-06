@@ -31,3 +31,13 @@ mobs:
   - 52
   - 131
 ```
+# Commands:
+```
+/hpbar help - help
+/hpbar about - about the plugin
+/hpbar reload - reloading configs[/QUOTE]
+```
+# Permissions:
+```
+healthbossbar.reload
+```
