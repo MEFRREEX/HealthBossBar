@@ -24,14 +24,14 @@ public class ReloadCommand extends Command {
 
         commandParameters.clear();
         this.commandParameters.put("default", new CommandParameter[] {
-                CommandParameter.newEnum("action", new CommandEnum("Action", "reload", "info", "about"))
+                CommandParameter.newEnum("action", new CommandEnum("Action", "help", "reload", "info", "about"))
         });
     }
 
     @Override
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(new TranslationContainer("commands.generic.usage", "/hpbar reload"));
+            sender.sendMessage(new TranslationContainer("commands.generic.usage", "/hpbar help"));
             return false;
         }
         switch (args[0]) {
@@ -45,17 +45,18 @@ public class ReloadCommand extends Command {
                     sender.sendMessage("§cYou do not have permission for this action");
                 }
                 break;
-            case "info":
             case "about":
+            case "info":
                 if (sender.hasPermission("healthbossbar.about")) {
                     sender.sendMessage("§eThis plugin was written for free distribution and can be downloaded at §7https://cloudburstmc.org/resources/health-boss-bar.861/.\n§fDeveloper: MEFRREEXX");
                 } else {
                     sender.sendMessage("§cYou do not have permission for this action");
                 }
                 break;
+            case "help":
+                sender.sendMessage("§fHealth boss bar commands:\n§f/hpbar reload §8- §7Reload all configs\n§f/hpbar about §8- §7About the plugin");
+                break;
         }
         return false;
     }
-    
-
 }
