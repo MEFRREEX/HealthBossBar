@@ -6,7 +6,7 @@ Displaying the enemy's health in the boss bar
 # Configuration:
 
 `config.yml`
-```
+```yml
 # Available placeholders: {name}, {tag}, {health}, {maxhealth}.
 bossbar-text: "{name}"
 
@@ -17,7 +17,7 @@ color: "RED"
 bossbar-remove-time: 5
 ```
 `mobs.yml`
-```
+```yml
 enable: true
 
 # Available: blacklist, whitelist.
