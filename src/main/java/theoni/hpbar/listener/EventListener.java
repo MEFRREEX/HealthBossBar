@@ -53,7 +53,7 @@ public class EventListener implements Listener {
             Float health = entity.getHealth();
             Float maxhealth = (float) entity.getMaxHealth();
 
-            int length = (int) Main.toPercentage(health, 0, maxhealth);
+            int length = (int) Main.toPercentage(health - event.getFinalDamage(), 0, maxhealth);
 
             DummyBossBar bar = new Builder(damager)
                 .text(config.getString("bossbar-text")
@@ -62,7 +62,7 @@ public class EventListener implements Listener {
                     .replace("{health}", health.toString())
                     .replace("{maxhealth}", maxhealth.toString()))
                 .color(BossBarColor.valueOf(config.getString("color").toUpperCase()))
-                .length(length)
+                .length(length >= 0 ? length : 0)
                 .build();
 
             BossBarManager.createOrUpdateBar(damager, bar);;
