@@ -1,6 +1,6 @@
 name: ${project.name}
 version: ${project.version}
 api: ["1.0.8"]
-author: The Oni
+author: MEFRREEX
 description: ${project.description}
 main: theoni.hpbar.Main
